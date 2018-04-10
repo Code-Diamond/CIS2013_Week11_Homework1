@@ -87,6 +87,21 @@ class Car
                 return false;
             }
         }
+
+        void TurnLeft()
+        {
+            cout << "\n\nYou turn left.\n\n";
+        }
+
+        void TurnRight()
+        {
+            cout << "\n\nYou turn right.\n\n";
+        }
+
+        void DeploySpikeTraps()
+        {
+            cout <<"\n\nNananana batman.\n\n";
+        }
 };
 
 
@@ -245,15 +260,18 @@ int main()
                 }
                 if(drivingAction == "l")
                 {
-                    //myCar.TurnLeft()
+                    ClearConsole();                    
+                    myCar.TurnLeft();
                 }
                 if(drivingAction == "r")
                 {
-                    //myCar.TurnRight()
+                    ClearConsole();                    
+                    myCar.TurnRight();
                 }
                 if(drivingAction == "t")
                 {
-                    //myCar.DeploySpikeTraps();
+                    ClearConsole();                    
+                    myCar.DeploySpikeTraps();
                 }
                 if(drivingAction == "x")
                 {
