@@ -5,126 +5,137 @@ using namespace std;
 
 class Car
 {
-	//Privately accessed variables
-	private:
-		string color;
-		string make;
-		string model;
-		string year;
-		string currentSpeed;
-		bool isRunning;
+    //Privately accessed variables
+    private:
+        string color;
+        string make;
+        string model;
+        string year;
+        int currentSpeed;
+        bool isRunning;
     //Publicly accessed functions/methods
-	public:
+    public:
 
-		//Getters
-		string getColor()
-		{
-			return color;
-		}
-		string getMake()
-		{
-			return make;
-		}
-		string getModel()
-		{
-			return model;
-		}
-		string getYear()
-		{
-			return year;
-		}
-		string getCurrentSpeed()
-		{
-			return currentSpeed;
-		}
-		bool getIsRunning()
-		{
-			return isRunning;
-		}
+        //Getters
+        string GetColor()
+        {
+            return color;
+        }
+        string GetMake()
+        {
+            return make;
+        }
+        string GetModel()
+        {
+            return model;
+        }
+        string GetYear()
+        {
+            return year;
+        }
+        int GetCurrentSpeed()
+        {
+            return currentSpeed;
+        }
+        bool GetIsRunning()
+        {
+            return isRunning;
+        }
 
-		//Setters
-		void setColor(string inputColor)
-		{
-			color = inputColor;
-		}
-		void setMake(string inputMake)
-		{
-			make = inputMake;
-		}
-		void setModel(string inputModel)
-		{
-			model = inputModel;
-		}
-		void setYear(string inputYear)
-		{
-			year = inputYear;
-		}
-		void setCurrentSpeed(string inputCurrentSpeed)
-		{
-			currentSpeed = inputCurrentSpeed;
-		}
-        void setIsRunning(bool inputIsRunning)
+        //Setters
+        void SetColor(string inputColor)
+        {
+            color = inputColor;
+        }
+        void SetMake(string inputMake)
+        {
+            make = inputMake;
+        }
+        void SetModel(string inputModel)
+        {
+            model = inputModel;
+        }
+        void SetYear(string inputYear)
+        {
+            year = inputYear;
+        }
+        void IncreaseSpeed()
+        {
+            currentSpeed += 10;
+        }
+        void DecreaseSpeed()
+        {
+            currentSpeed -= 10;
+        }
+        void SetIsRunning(bool inputIsRunning)
         {
             isRunning = inputIsRunning;
+        }
+        void SetCurrentSpeed(int speed)
+        {
+            currentSpeed = speed;
         }
 
 };
 
 
-string displayMenu(string);
-void printDetails(Car);
-void clearConsole();
+string DisplayMenu(string);
+void PrintDetails(Car);
+void ClearConsole();
+
+
 int main()
 {
+    ClearConsole();
     //Create a car object
-	Car myCar;
-	myCar.setIsRunning(false);
-
-	string action;
-	bool exit = false;
+    Car myCar;
+    myCar.SetIsRunning(false);
+    myCar.SetCurrentSpeed(0);
+    string action;
+    bool exit = false;
     while(!exit)
     {
-        action = displayMenu(action);
+        action = DisplayMenu(action);
 
         //cout << "\nAction typed: " << action << endl;
         if(action == "c")
         {
             string inputColor;
             cout << "\n Please enter the color of the car.\nColor: ", cin >> inputColor;
-            myCar.setColor(inputColor);
-            clearConsole();
+            myCar.SetColor(inputColor);
+            ClearConsole();
         }
         if(action == "m")
         {
             string inputMake;
             cout << "\nPlease enter the make of the car.\nMake: ", cin >> inputMake;
             //cout << "\nMake typed: " << inputMake << endl;
-            myCar.setMake(inputMake);
-            clearConsole();
+            myCar.SetMake(inputMake);
+            ClearConsole();
         }
         if(action == "o")
         {
             string inputModel;
             cout << "\nPlease enter the model of the car.\nModel: ", cin >> inputModel;
             //cout << "\nModel typed: " << inputModel << endl;
-            myCar.setModel(inputModel);
-            clearConsole();
+            myCar.SetModel(inputModel);
+            ClearConsole();
         }
         if(action == "y")
         {
             string inputYear;
             cout << "\nPlease enter the year of the car.\nYear: ", cin >> inputYear;
             //cout << "\nYear typed: " << inputYear << endl;
-            myCar.setYear(inputYear);
-            clearConsole();
+            myCar.SetYear(inputYear);
+            ClearConsole();
         }
         if(action == "s")
         {
             //start
-            if(!myCar.getIsRunning())
+            if(!myCar.GetIsRunning())
             {
-                myCar.setIsRunning(true);
-                clearConsole();
+                myCar.SetIsRunning(true);
+                ClearConsole();
             }
             else
             {
@@ -133,11 +144,11 @@ int main()
         }
         if(action == "S")
         {
-            if(myCar.getIsRunning())
+            if(myCar.GetIsRunning())
             {
                 //Stop the car / turn off
-                myCar.setIsRunning(false);
-                clearConsole();
+                myCar.SetIsRunning(false);
+                ClearConsole();
             }
             else
             {
@@ -146,16 +157,18 @@ int main()
         }
         if(action == "p")
         {
-            printDetails(myCar);
+            PrintDetails(myCar);
         }
 
         if(action == "d")
         {
             //Need a conditional here to check if the car is turned on
             bool driving = true;
-
+            ClearConsole();
             while(driving)
             {
+
+
                 string drivingAction;
                 cout <<     "   Select an action: \n"
                      <<     "       - increase speed       (+)\n"
@@ -170,11 +183,15 @@ int main()
 
                 if(drivingAction == "+")
                 {
-                    //myCar.IncreaseSpeed();
+                    ClearConsole();
+                    myCar.IncreaseSpeed();
+                    cout << "\nYou are now driving: " << myCar.GetCurrentSpeed() << ".\n\n";
                 }
                 if(drivingAction == "-")
                 {
-                    //myCar.DecreaseSpeed();
+                    ClearConsole();
+                    myCar.DecreaseSpeed();
+                    cout << "\nYou are now driving: " << myCar.GetCurrentSpeed() << ".\n\n";
                 }
                 if(drivingAction == "l")
                 {
@@ -204,11 +221,12 @@ int main()
         }
 
     }
-	return 0;
+
+    return 0;
 }
 
 
-string displayMenu(string action)
+string DisplayMenu(string action)
 {
         cout <<     "   Select an action: \n"
              <<     "       - set color (c)\n"
@@ -228,16 +246,16 @@ string displayMenu(string action)
 }
 
 
-void printDetails(Car c)
+void PrintDetails(Car c)
 {
     //Need to add the current state of car at the end of the print statement
-    cout << "\n\n\nYou\'re diving a " << c.getYear() << " " << c.getMake() << " " << c.getModel() << ", " << c.getColor() << ".";
+    cout << "\n\n\nYou\'re diving a " << c.GetYear() << " " << c.GetMake() << " " << c.GetModel() << ", " << c.GetColor() << ".";
 
-    if(c.getIsRunning())
+    if(c.GetIsRunning())
     {
         cout << "\nThe car is currently in turned ON.\n";
     }
-    if(!c.getIsRunning())
+    if(!c.GetIsRunning())
     {
         cout << "\nThe car is currently in turned OFF.\n";
     }
@@ -245,7 +263,7 @@ void printDetails(Car c)
 
 }
 
-void clearConsole()
+void ClearConsole()
 {
         //Clear console
         for(int i = 0; i < 50; i++)
