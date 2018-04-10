@@ -142,16 +142,30 @@ int main()
         }
         if(action == "s")
         {
-            //start
-            if(!myCar.GetIsRunning())
+            if(myCar.CheckIsPrintable())
             {
-                myCar.SetIsRunning(true);
-                ClearConsole();
+                //start
+                if(!myCar.GetIsRunning())
+                {
+                    myCar.SetIsRunning(true);
+                    ClearConsole();
+                }
+                else
+                {
+                    cout << "\n\nYour car is already turned on. . .\n\n";
+                }
             }
             else
             {
-                cout << "\n\nYour car is already turned on. . .\n\n";
+                cout << "\n\n\nYou are still missing some information about your car!\n\n";
+                cout << "_Current information_" << endl ;
+                cout << "-Color: " << myCar.GetColor() << endl;
+                cout << "-Make : " << myCar.GetMake() << endl;
+                cout << "-Model: " << myCar.GetModel() << endl;
+                cout << "-Year : " << myCar.GetYear() << endl << endl;                
             }
+
+
         }
         if(action == "S")
         {
@@ -191,8 +205,6 @@ int main()
             ClearConsole();
             while(driving)
             {
-
-
                 string drivingAction;
                 cout <<     "   Select an action: \n"
                      <<     "       - increase speed       (+)\n"
@@ -209,13 +221,27 @@ int main()
                 {
                     ClearConsole();
                     myCar.IncreaseSpeed();
-                    cout << "\nYou are now driving: " << myCar.GetCurrentSpeed() << ".\n\n";
+                    cout << "\nYou speed up, are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
+                    if(myCar.GetCurrentSpeed() > 80)
+                    {
+                        cout << "You were pulled over by the police. \n\nYour quest to make it home in time for dinner has failed. \n\nGame over!\n" << endl;
+                        driving = false;
+                        exit = true;
+                    }
+
                 }
                 if(drivingAction == "-")
                 {
                     ClearConsole();
                     myCar.DecreaseSpeed();
-                    cout << "\nYou are now driving: " << myCar.GetCurrentSpeed() << ".\n\n";
+                    cout << "\nYou slow down, and are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
+                    if(myCar.GetCurrentSpeed() < 0)
+                    {
+                        cout << "You went back in time and fall into an erupting prehistoric volcano. \n\nYour quest to make it home in time for dinner has failed. \n\nGame Over!\n" << endl;
+                        driving = false;
+                        exit = true;
+                    }
+
                 }
                 if(drivingAction == "l")
                 {
