@@ -148,6 +148,56 @@ int main()
         {
             printDetails(myCar);
         }
+
+        if(action == "d")
+        {
+            //Need a conditional here to check if the car is turned on
+            bool driving = true;
+
+            while(driving)
+            {
+                string drivingAction;
+                cout <<     "   Select an action: \n"
+                     <<     "       - increase speed       (+)\n"
+                     <<     "       - decrease speed       (-)\n"
+                     <<     "       - turn left            (l)\n"
+                     <<     "       - turn right           (r)\n"
+                     <<     "       - deploy spike traps   (t)\n"
+                     <<     "       - stop                 (x)\n" << endl;
+
+                cout << "\nWhat would you like to do?\n";
+                cout << "\nAction: ", cin >> drivingAction;
+
+                if(drivingAction == "+")
+                {
+                    //myCar.IncreaseSpeed();
+                }
+                if(drivingAction == "-")
+                {
+                    //myCar.DecreaseSpeed();
+                }
+                if(drivingAction == "l")
+                {
+                    //myCar.TurnLeft()
+                }
+                if(drivingAction == "r")
+                {
+                    //myCar.TurnRight()
+                }
+                if(drivingAction == "t")
+                {
+                    //myCar.DeploySpikeTraps();
+                }
+                if(drivingAction == "x")
+                {
+                    driving = false;
+                }
+            //End of Driving loop
+            }
+
+        }
+
+
         if(action == "x")
         {
             exit = true;
@@ -168,6 +218,7 @@ string displayMenu(string action)
              <<     "       - start car (s)\n"
              <<     "       - stop car  (S)\n"
              <<     "       - print     (p)\n"
+             <<     "       - drive     (d)\n"
              <<     "       - exit      (x)\n" << endl;
 
         cout << "\nWhat would you like to do?\n";
