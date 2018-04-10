@@ -164,10 +164,12 @@ int main()
                 {
                     myCar.SetIsRunning(true);
                     ClearConsole();
+                    cout << "You start your car.\n\n";
                 }
                 else
                 {
-                    cout << "\n\nYour car is already turned on. . .\n\n";
+                    ClearConsole();
+                    cout << "Your car is already turned on. . .\n\n";
                 }
             }
             else
@@ -189,10 +191,12 @@ int main()
                 //Stop the car / turn off
                 myCar.SetIsRunning(false);
                 ClearConsole();
+                cout << "Your car is now off.\n\n";
             }
             else
             {
-                cout << "\n\nYou car is already turned off. . .\n\n";
+                ClearConsole();
+                cout << "You car is already turned off. . .\n\n";
             }
         }
         if(action == "p")
@@ -215,70 +219,88 @@ int main()
 
         if(action == "d")
         {
-            //Need a conditional here to check if the car is turned on
-            bool driving = true;
-            ClearConsole();
-            while(driving)
+            if(myCar.GetIsRunning())
             {
-                string drivingAction;
-                cout <<     "   Select an action: \n"
-                     <<     "       - increase speed       (+)\n"
-                     <<     "       - decrease speed       (-)\n"
-                     <<     "       - turn left            (l)\n"
-                     <<     "       - turn right           (r)\n"
-                     <<     "       - deploy spike traps   (t)\n"
-                     <<     "       - stop                 (x)\n" << endl;
-
-                cout << "\nWhat would you like to do?\n";
-                cout << "\nAction: ", cin >> drivingAction;
-
-                if(drivingAction == "+")
+                bool driving = true;
+                ClearConsole();
+                while(driving)
                 {
-                    ClearConsole();
-                    myCar.IncreaseSpeed();
-                    cout << "\nYou speed up, are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
-                    if(myCar.GetCurrentSpeed() > 80)
+                    string drivingAction;
+                    cout <<     "   Select an action: \n"
+                         <<     "       - increase speed       (+)\n"
+                         <<     "       - decrease speed       (-)\n"
+                         <<     "       - turn left            (l)\n"
+                         <<     "       - turn right           (r)\n"
+                         <<     "       - deploy spike traps   (t)\n"
+                         <<     "       - stop                 (x)\n" << endl;
+
+                    cout << "\nWhat would you like to do?\n";
+                    cout << "\nAction: ", cin >> drivingAction;
+
+                    if(drivingAction == "+")
                     {
-                        cout << "You were pulled over by the police. \n\nYour quest to make it home in time for dinner has failed. \n\nGame over!\n" << endl;
-                        driving = false;
-                        exit = true;
-                    }
+                        ClearConsole();
+                        myCar.IncreaseSpeed();
+                        cout << "\nYou speed up, are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
+                        if(myCar.GetCurrentSpeed() > 80)
+                        {
+                            cout << "You were pulled over by the police. \n\nYour quest to make it home in time for dinner has failed. \n\nGame over!\n" << endl;
+                            driving = false;
+                            exit = true;
+                        }
 
-                }
-                if(drivingAction == "-")
-                {
-                    ClearConsole();
-                    myCar.DecreaseSpeed();
-                    cout << "\nYou slow down, and are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
-                    if(myCar.GetCurrentSpeed() < 0)
+                    }
+                    if(drivingAction == "-")
                     {
-                        cout << "You went back in time and fall into an erupting prehistoric volcano. \n\nYour quest to make it home in time for dinner has failed. \n\nGame Over!\n" << endl;
-                        driving = false;
-                        exit = true;
-                    }
+                        ClearConsole();
+                        myCar.DecreaseSpeed();
+                        cout << "\nYou slow down, and are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
+                        if(myCar.GetCurrentSpeed() < 0)
+                        {
+                            cout << "You went back in time and fall into an erupting prehistoric volcano. \n\nYour quest to make it home in time for dinner has failed. \n\nGame Over!\n" << endl;
+                            driving = false;
+                            exit = true;
+                        }
 
+                    }
+                    if(drivingAction == "l")
+                    {
+                        ClearConsole();                    
+                        myCar.TurnLeft();
+                    }
+                    if(drivingAction == "r")
+                    {
+                        ClearConsole();                    
+                        myCar.TurnRight();
+                    }
+                    if(drivingAction == "t")
+                    {
+                        ClearConsole();                    
+                        myCar.DeploySpikeTraps();
+                    }
+                    if(drivingAction == "x")
+                    {
+                        if(myCar.GetCurrentSpeed() != 0)
+                        {
+                            ClearConsole();
+                            cout << "You must decrease speed before stopping.\n\n";
+                        }
+                        else
+                        {
+                            ClearConsole();
+                            driving = false;    
+                        }
+                        
+                    }
+                //End of Driving loop
                 }
-                if(drivingAction == "l")
-                {
-                    ClearConsole();                    
-                    myCar.TurnLeft();
-                }
-                if(drivingAction == "r")
-                {
-                    ClearConsole();                    
-                    myCar.TurnRight();
-                }
-                if(drivingAction == "t")
-                {
-                    ClearConsole();                    
-                    myCar.DeploySpikeTraps();
-                }
-                if(drivingAction == "x")
-                {
-                    driving = false;
-                }
-            //End of Driving loop
             }
+            else
+            {
+                ClearConsole();
+                cout << "You must start your car before you drive. . . \n\n";
+            }
+
 
         }
 
