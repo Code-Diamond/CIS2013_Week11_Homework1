@@ -76,6 +76,17 @@ class Car
             currentSpeed = speed;
         }
 
+        bool CheckIsPrintable()
+        {
+            if(make != "" && model != "" && year != "" && color != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 };
 
 
@@ -157,7 +168,20 @@ int main()
         }
         if(action == "p")
         {
-            PrintDetails(myCar);
+            if(myCar.CheckIsPrintable())
+            {
+                PrintDetails(myCar);    
+            }
+            else
+            {
+                cout << "\n\n\nYou are still missing some information about your car!\n\n";
+                cout << "_Current information_" << endl ;
+                cout << "-Color: " << myCar.GetColor() << endl;
+                cout << "-Make : " << myCar.GetMake() << endl;
+                cout << "-Model: " << myCar.GetModel() << endl;
+                cout << "-Year : " << myCar.GetYear() << endl << endl;
+            }
+            
         }
 
         if(action == "d")
@@ -249,15 +273,15 @@ string DisplayMenu(string action)
 void PrintDetails(Car c)
 {
     //Need to add the current state of car at the end of the print statement
-    cout << "\n\n\nYou\'re diving a " << c.GetYear() << " " << c.GetMake() << " " << c.GetModel() << ", " << c.GetColor() << ".";
+    cout << "\n\n\nYou\'re driving a "<< c.GetColor() << " " << c.GetYear() << " " << c.GetMake() << " " << c.GetModel() << ".";
 
     if(c.GetIsRunning())
     {
-        cout << "\nThe car is currently in turned ON.\n";
+        cout << "\nThe car is currently turned ON.\n";
     }
     if(!c.GetIsRunning())
     {
-        cout << "\nThe car is currently in turned OFF.\n";
+        cout << "\nThe car is currently turned OFF.\n";
     }
     cout << endl << endl;
 
