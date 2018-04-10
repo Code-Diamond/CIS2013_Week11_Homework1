@@ -104,11 +104,9 @@ class Car
         }
 };
 
-
 string DisplayMenu(string);
 void PrintDetails(Car);
 void ClearConsole();
-
 
 int main()
 {
@@ -117,20 +115,20 @@ int main()
     Car myCar;
     myCar.SetIsRunning(false);
     myCar.SetCurrentSpeed(0);
+    
     string action;
     bool exit = false;
 
-    cout << "You must get home in time for dinner!!\n\n Build a car fast!\n\n";
+    cout << "You must get home in time for dinner!!\n\n  Build a car fast!\n\n   GOOD LUCK!\n\n";
 
     while(!exit)
     {
         action = DisplayMenu(action);
 
-        //cout << "\nAction typed: " << action << endl;
         if(action == "c")
         {
             string inputColor;
-            cout << "\n Please enter the color of the car.\nColor: ", cin >> inputColor;
+            cout << "\nPlease enter the color of the car.\nColor: ", cin >> inputColor;
             myCar.SetColor(inputColor);
             ClearConsole();
         }
@@ -138,7 +136,6 @@ int main()
         {
             string inputMake;
             cout << "\nPlease enter the make of the car.\nMake: ", cin >> inputMake;
-            //cout << "\nMake typed: " << inputMake << endl;
             myCar.SetMake(inputMake);
             ClearConsole();
         }
@@ -146,7 +143,6 @@ int main()
         {
             string inputModel;
             cout << "\nPlease enter the model of the car.\nModel: ", cin >> inputModel;
-            //cout << "\nModel typed: " << inputModel << endl;
             myCar.SetModel(inputModel);
             ClearConsole();
         }
@@ -154,7 +150,6 @@ int main()
         {
             string inputYear;
             cout << "\nPlease enter the year of the car.\nYear: ", cin >> inputYear;
-            //cout << "\nYear typed: " << inputYear << endl;
             myCar.SetYear(inputYear);
             ClearConsole();
         }
@@ -177,15 +172,14 @@ int main()
             }
             else
             {
+                ClearConsole();
                 cout << "\n\n\nYou are still missing some information about your car!\n\n";
-                cout << "_Current information_" << endl ;
-                cout << "-Color: " << myCar.GetColor() << endl;
-                cout << "-Make : " << myCar.GetMake() << endl;
-                cout << "-Model: " << myCar.GetModel() << endl;
-                cout << "-Year : " << myCar.GetYear() << endl << endl;                
+                cout << "Current information" << endl ;
+                cout << " -Color: " << myCar.GetColor() << endl;
+                cout << " -Make : " << myCar.GetMake() << endl;
+                cout << " -Model: " << myCar.GetModel() << endl;
+                cout << " -Year : " << myCar.GetYear() << endl << endl;                
             }
-
-
         }
         if(action == "S")
         {
@@ -206,37 +200,39 @@ int main()
         {
             if(myCar.CheckIsPrintable())
             {
+                ClearConsole();
                 PrintDetails(myCar);    
             }
             else
             {
+                ClearConsole();
                 cout << "\n\n\nYou are still missing some information about your car!\n\n";
-                cout << "_Current information_" << endl ;
-                cout << "-Color: " << myCar.GetColor() << endl;
-                cout << "-Make : " << myCar.GetMake() << endl;
-                cout << "-Model: " << myCar.GetModel() << endl;
-                cout << "-Year : " << myCar.GetYear() << endl << endl;
-            }
-            
+                cout << "Current information" << endl ;
+                cout << " -Color: " << myCar.GetColor() << endl;
+                cout << " -Make : " << myCar.GetMake() << endl;
+                cout << " -Model: " << myCar.GetModel() << endl;
+                cout << " -Year : " << myCar.GetYear() << endl << endl;
+            }            
         }
-
         if(action == "d")
         {
             if(myCar.GetIsRunning())
             {
                 bool driving = true;
                 ClearConsole();
+                cout << "You grab the steering wheel.\n\n";
                 while(driving)
                 {
                     string drivingAction;
-                    cout <<     "   Select an action: \n"
+                    cout <<     "_________________________________\n"
+                         <<     "   Select an action: \n"
                          <<     "       - increase speed       (+)\n"
                          <<     "       - decrease speed       (-)\n"
                          <<     "       - turn left            (l)\n"
                          <<     "       - turn right           (r)\n"
                          <<     "       - deploy spike traps   (t)\n"
-                         <<     "       - stop                 (x)\n" << endl;
-
+                         <<     "       - stop                 (x)\n"
+                         <<     "_________________________________\n" << endl;
                     cout << "\nWhat would you like to do?\n";
                     cout << "\nAction: ", cin >> drivingAction;
 
@@ -244,7 +240,7 @@ int main()
                     {
                         ClearConsole();
                         myCar.IncreaseSpeed();
-                        cout << "\nYou speed up, are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
+                        cout << "\nYou speed up, and are now driving " << myCar.GetCurrentSpeed() << " MPH.\n\n";
                         if(myCar.GetCurrentSpeed() > 80)
                         {
                             cout << "You were pulled over by the police. \n\nYour quest to make it home in time for dinner has failed. \n\nGame over!\n" << endl;
@@ -264,7 +260,6 @@ int main()
                             driving = false;
                             exit = true;
                         }
-
                     }
                     if(drivingAction == "l")
                     {
@@ -291,37 +286,43 @@ int main()
                         else
                         {
                             ClearConsole();
+                            cout << "You stopped your car.\n\n";
                             driving = false;    
-                        }
-                        
+                        }           
                     }
-                //End of Driving loop
-                }
+                    if(drivingAction != "+" && drivingAction != "-" && drivingAction != "l" && drivingAction != "r" && drivingAction != "t" && drivingAction != "x")
+                    {
+                        ClearConsole();
+                        cout << "Invalid action.\n\n";
+                    }
+
+                }//End of Driving loop
             }
             else
             {
                 ClearConsole();
                 cout << "You must start your car before you drive. . . \n\n";
             }
-
-
         }
-
-
         if(action == "x")
         {
+            ClearConsole();
             exit = true;
         }
-
-    }
+        if(action != "c" && action != "m" && action != "o" && action != "y" && action != "s" && action != "S" && action != "p" && action != "d" && action != "x")
+        {
+            ClearConsole();
+            cout << "Invalid action.\n\n";
+        }
+    }//End of game loop
 
     return 0;
 }
 
-
 string DisplayMenu(string action)
 {
-        cout <<     "   Select an action: \n"
+        cout <<     "______________________\n"
+             <<     "   Select an action:  \n"
              <<     "       - set color (c)\n"
              <<     "       - set make  (m)\n"
              <<     "       - set model (o)\n"
@@ -330,7 +331,8 @@ string DisplayMenu(string action)
              <<     "       - stop car  (S)\n"
              <<     "       - print     (p)\n"
              <<     "       - drive     (d)\n"
-             <<     "       - exit      (x)\n" << endl;
+             <<     "       - exit      (x)\n"
+             <<     "______________________\n" << endl;
 
         cout << "\nWhat would you like to do?\n";
         cout << "\nAction: ", cin >> action;
@@ -338,11 +340,9 @@ string DisplayMenu(string action)
 
 }
 
-
 void PrintDetails(Car c)
 {
-    //Need to add the current state of car at the end of the print statement
-    cout << "\n\n\nYou\'re driving a "<< c.GetColor() << " " << c.GetYear() << " " << c.GetMake() << " " << c.GetModel() << ".";
+    cout << "\n\n\nYou\'re driving a "<< c.GetColor() << ", " << c.GetYear() << " " << c.GetMake() << " " << c.GetModel() << ".";
 
     if(c.GetIsRunning())
     {
@@ -358,7 +358,6 @@ void PrintDetails(Car c)
 
 void ClearConsole()
 {
-        //Clear console
         for(int i = 0; i < 50; i++)
         {
             cout << "\n";
