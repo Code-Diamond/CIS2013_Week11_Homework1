@@ -119,6 +119,9 @@ int main()
     myCar.SetCurrentSpeed(0);
     string action;
     bool exit = false;
+
+    cout << "You must get home in time for dinner!!\n\n Build a car fast!\n\n";
+
     while(!exit)
     {
         action = DisplayMenu(action);
